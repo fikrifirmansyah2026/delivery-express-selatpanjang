@@ -1,78 +1,25 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jet Delivery Express - Selatpanjang</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <title>Delivery Express Selatpanjang</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
 </head>
-<body class="bg-gray-50">
 
-    <nav class="bg-blue-600 p-4 text-white shadow-lg">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold tracking-wider">JET DELIVERY</h1>
-            <i class="fas fa-shipping-fast text-2xl"></i>
-        </div>
-    </nav>
+<body>
+  <div class="container">
+    <h1>Pengiriman Ekspres Selatpanjang</h1>
+    
+    <div class="card">
+      <p>
+        Layanan transportasi pengiriman ekspres melayani berbagai kebutuhan kamu.
+      </p>
 
-    <main class="container mx-auto p-4 md:max-w-2xl">
-        <div class="bg-white rounded-2xl shadow-sm p-6 mb-6">
-            <h2 class="text-lg font-semibold mb-4 text-gray-700">Pesan Kurir Sekarang</h2>
-            
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-sm text-gray-500">Lokasi Penjemputan</label>
-                    <div class="flex items-center border-b-2 border-gray-100 py-2">
-                        <i class="fas fa-map-marker-alt text-red-500 mr-3"></i>
-                        <input type="text" id="pickup" placeholder="Contoh: Jl. Merdeka No. 1" class="w-full focus:outline-none bg-transparent">
-                    </div>
-                </div>
+      <button onclick="hubungiKami()">Hubungi Kami</button>
+    </div>
+  </div>
 
-                <div>
-                    <label class="block text-sm text-gray-500">Lokasi Tujuan</label>
-                    <div class="flex items-center border-b-2 border-gray-100 py-2">
-                        <i class="fas fa-location-arrow text-blue-500 mr-3"></i>
-                        <input type="text" id="destination" placeholder="Contoh: Pelabuhan Selatpanjang" class="w-full focus:outline-none bg-transparent">
-                    </div>
-                </div>
-
-                <div class="bg-blue-50 p-4 rounded-xl flex justify-between items-center">
-                    <div>
-                        <p class="text-xs text-blue-600 font-bold uppercase">Estimasi Biaya</p>
-                        <p class="text-2xl font-bold text-gray-800" id="priceTag">Rp 0</p>
-                    </div>
-                    <button onclick="calculatePrice()" class="text-sm bg-blue-200 text-blue-700 px-3 py-1 rounded-full hover:bg-blue-300">Cek Ongkir</button>
-                </div>
-
-                <button class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition shadow-lg active:scale-95">
-                    PESAN SEKARANG
-                </button>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-2xl shadow-sm p-6">
-            <h3 class="font-bold text-gray-700 mb-4">Aktivitas Terakhir</h3>
-            <div class="flex items-center space-x-4">
-                <div class="bg-green-100 p-3 rounded-full">
-                    <i class="fas fa-box text-green-600"></i>
-                </div>
-                <div>
-                    <p class="text-sm font-medium">Pesanan #12405</p>
-                    <p class="text-xs text-gray-400">Sedang diantar oleh Kurir (Andi)</p>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        function calculatePrice() {
-            // Simulasi perhitungan: Rp 5.000 (base) + Rp 2.000/km
-            // Dalam aplikasi asli, gunakan Google Maps API Distance Matrix
-            const randomDistance = Math.floor(Math.random() * 10) + 1; 
-            const price = 5000 + (randomDistance * 2000);
-            document.getElementById('priceTag').innerText = "Rp " + price.toLocaleString('id-ID');
-        }
-    </script>
+  <script src="app.js"></script>
 </body>
 </html>
