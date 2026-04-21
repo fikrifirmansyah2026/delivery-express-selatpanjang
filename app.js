@@ -21,6 +21,9 @@ function ambilLokasi() {
   });
 }
 
+function notification() {
+alert("Kurir sedang menuju lokasi kamu 🚚");
+
 function hubungiKami() {
   alert("Silakan hubungi admin via WhatsApp!");
 }
