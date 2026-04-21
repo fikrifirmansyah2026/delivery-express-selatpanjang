@@ -1,3 +1,10 @@
+const password = prompt("Masukkan password admin:");
+
+if (password !== "admin123") {
+  alert("Akses ditolak!");
+  window.location.href = "indeks.html";
+}
+
 function loadAdmin() {
   const list = document.getElementById("adminList");
   let orders = JSON.parse(localStorage.getItem("orders")) || [];
