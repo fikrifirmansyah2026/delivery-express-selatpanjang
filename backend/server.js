@@ -1,120 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Delivery Express Selatpanjang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial;
+      margin: 0;
+      background: #f5f5f5;
+      text-align: center;
+    }
+
+    header {
+      background: #ff3b3b;
+      color: white;
+      padding: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    button {
+      background: #ff3b3b;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e60000;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  🚚 Delivery Express Selatpanjang
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h3>Order Makanan</h3>
+    <p>Pesan cepat langsung dari rumah</p>
+    <button onclick="goOrder()">Pesan Sekarang</button>
+  </div>
+
+  <div class="card">
+    <h3>Tracking</h3>
+    <p>Cek status pesanan kamu</p>
+    <button onclick="alert('Fitur coming soon')">Cek Tracking</button>
+  </div>
+
+</div>
+
+<script>
+function goOrder() {
+  window.location.href = "order.html";
+
 const express = require("express");
 const cors = require("cors");
-const bodyParser = require("body-parser");
-const mysql = require("mysql2");
 
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
-// =====================
-// MYSQL CONNECTION
-// =====================
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "delivery_express",
-});
+// ROUTES
+const orderRoutes = require("./routes/orderRoutes");
+app.use("/", orderRoutes);
 
-db.connect((err) => {
-  if (err) {
-    console.log("❌ MySQL gagal konek", err);
-  } else {
-    console.log("✅ MySQL Connected");
-  }
-});
-
-// =====================
-// TEST SERVER
-// =====================
+// TEST API
 app.get("/", (req, res) => {
-  res.json({ message: "🚀 Backend + MySQL Aktif" });
+  res.json({ message: "🚀 API Delivery Express Aktif" });
 });
 
-// =====================
-// REGISTER
-// =====================
-app.post("/register", (req, res) => {
-  const { email, password } = req.body;
+const PORT = 3000;
 
-  db.query(
-    "INSERT INTO users (email, password) VALUES (?, ?)",
-    [email, password],
-    (err, result) => {
-      if (err) return res.json(err);
-
-      res.json({
-        message: "User berhasil dibuat",
-        id: result.insertId,
-      });
-    }
-  );
+app.listen(PORT, () => {
+  console.log("🚀 Server jalan di port " + PORT);
 });
 
-// =====================
-// LOGIN
-// =====================
-app.post("/login", (req, res) => {
-  const { email, password } = req.body;
-
-  db.query(
-    "SELECT * FROM users WHERE email=? AND password=?",
-    [email, password],
-    (err, result) => {
-      if (result.length === 0) {
-        return res.status(401).json({ message: "Login gagal" });
-      }
-
-      res.json({ message: "Login sukses", user: result[0] });
-    }
-  );
-});
-
-// =====================
-// CREATE ORDER
-// =====================
-app.post("/order", (req, res) => {
-  const { user_email, alamat, barang } = req.body;
-
-  db.query(
-    "INSERT INTO orders (user_email, alamat, barang) VALUES (?, ?, ?)",
-    [user_email, alamat, barang],
-    (err, result) => {
-      res.json({
-        message: "Order dibuat",
-        id: result.insertId,
-      });
-    }
-  );
-});
-
-// =====================
-// GET ORDERS
-// =====================
-app.get("/orders", (req, res) => {
-  db.query("SELECT * FROM orders", (err, result) => {
-    res.json(result);
-  });
-});
-
-// =====================
-// UPDATE STATUS
-// =====================
-app.put("/order/:id", (req, res) => {
-  db.query(
-    "UPDATE orders SET status=? WHERE id=?",
-    [req.body.status, req.params.id],
-    (err) => {
-      res.json({ message: "Status diupdate" });
-    }
-  );
-});
-
-// =====================
-// START SERVER
-// =====================
-app.listen(3000, () => {
-  console.log("🚀 Server + MySQL jalan di http://localhost:3000");
-});
+</body>
+</html>
