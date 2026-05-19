@@ -1,20 +1,129 @@
 {
   "name": "Delivery Express Selatpanjang",
-  "short_name": "Delivery Express",
-  "start_url": "/index.html",
+  "short_name": "DeliveryExpress",
+  "description": "Aplikasi Delivery Express modern 2026 untuk Selatpanjang.",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#0d1117",
-  "theme_color": "#0d1117",
+  "orientation": "portrait",
+  "background_color": "#020617",
+  "theme_color": "#22c55e",
+  "lang": "id-ID",
+  "dir": "ltr",
+
+  "categories": [
+    "business",
+    "delivery",
+    "shopping",
+    "transportation"
+  ],
+
   "icons": [
+
     {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "src": "icons/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
     },
+
     {
-      "src": "icon-512.png",
+      "src": "icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+
+    {
+      "src": "icons/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+
+    {
+      "src": "icons/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+
+    {
+      "src": "icons/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+
+    {
+      "src": "icons/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+
+    {
+      "src": "icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
+
+  ],
+
+  "screenshots": [
+
+    {
+      "src": "assets/screenshot-mobile.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+
+    {
+      "src": "assets/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+
+  ],
+
+  "shortcuts": [
+
+    {
+      "name": "Order Delivery",
+      "short_name": "Order",
+      "description": "Pesan delivery cepat",
+      "url": "./order.html",
+      "icons": [
+        {
+          "src": "icons/order.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+
+    {
+      "name": "Dashboard Admin",
+      "short_name": "Admin",
+      "description": "Dashboard admin delivery",
+      "url": "./dashboard.html",
+      "icons": [
+        {
+          "src": "icons/admin.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+
   ]
-}
+
+    }
