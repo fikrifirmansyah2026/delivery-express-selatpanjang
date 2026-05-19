@@ -1,32 +1,542 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Buat Order</title>
-  <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Order Delivery | Delivery Express 2026</title>
+
+<meta name="description"
+content="Order delivery express Selatpanjang modern 2026">
+
+<link rel="manifest" href="manifest.json">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
+
+:root{
+
+--bg:#020617;
+--card:#0f172a;
+--primary:#22c55e;
+--primary2:#16a34a;
+--text:#ffffff;
+--muted:#94a3b8;
+--border:rgba(255,255,255,0.06);
+
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:
+radial-gradient(circle at top left,#0f172a,#020617 65%);
+color:var(--text);
+overflow-x:hidden;
+min-height:100vh;
+padding-bottom:100px;
+}
+
+/* =========================
+   BACKGROUND GLOW
+========================= */
+
+body::before{
+content:'';
+position:fixed;
+top:-200px;
+left:-200px;
+width:400px;
+height:400px;
+background:rgba(34,197,94,0.10);
+filter:blur(120px);
+z-index:-1;
+}
+
+body::after{
+content:'';
+position:fixed;
+bottom:-200px;
+right:-200px;
+width:400px;
+height:400px;
+background:rgba(59,130,246,0.08);
+filter:blur(140px);
+z-index:-1;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+padding:18px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(2,6,23,0.80);
+backdrop-filter:blur(18px);
+border-bottom:1px solid var(--border);
+position:sticky;
+top:0;
+z-index:999;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:20px;
+font-weight:700;
+}
+
+.logo-dot{
+width:12px;
+height:12px;
+border-radius:50%;
+background:var(--primary);
+box-shadow:0 0 20px var(--primary);
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+max-width:600px;
+margin:auto;
+padding:30px 20px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+text-align:center;
+margin-bottom:35px;
+}
+
+.badge{
+display:inline-flex;
+align-items:center;
+gap:8px;
+padding:10px 18px;
+background:rgba(34,197,94,0.10);
+border:1px solid rgba(34,197,94,0.18);
+border-radius:999px;
+color:var(--primary);
+font-size:12px;
+font-weight:600;
+margin-bottom:20px;
+}
+
+.header h1{
+font-size:38px;
+line-height:1.15;
+font-weight:800;
+margin-bottom:15px;
+}
+
+.header p{
+font-size:14px;
+line-height:1.8;
+color:var(--muted);
+}
+
+/* =========================
+   FORM CARD
+========================= */
+
+.form-card{
+background:rgba(255,255,255,0.03);
+backdrop-filter:blur(18px);
+border:1px solid var(--border);
+border-radius:30px;
+padding:25px;
+}
+
+/* =========================
+   INPUT
+========================= */
+
+.input-group{
+margin-bottom:20px;
+}
+
+label{
+display:block;
+margin-bottom:10px;
+font-size:14px;
+font-weight:500;
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:16px;
+border-radius:18px;
+border:1px solid var(--border);
+background:#111827;
+color:white;
+font-size:14px;
+outline:none;
+transition:0.3s;
+font-family:'Poppins',sans-serif;
+}
+
+textarea{
+resize:none;
+min-height:120px;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+border-color:var(--primary);
+box-shadow:
+0 0 0 4px rgba(34,197,94,0.10);
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn{
+width:100%;
+padding:17px;
+border:none;
+border-radius:22px;
+background:
+linear-gradient(
+135deg,
+var(--primary),
+var(--primary2)
+);
+color:white;
+font-size:15px;
+font-weight:700;
+cursor:pointer;
+transition:0.3s;
+box-shadow:
+0 10px 30px rgba(34,197,94,0.25);
+}
+
+.btn:hover{
+transform:translateY(-3px);
+}
+
+/* =========================
+   INFO CARD
+========================= */
+
+.info-card{
+margin-top:25px;
+background:rgba(255,255,255,0.03);
+backdrop-filter:blur(18px);
+border:1px solid var(--border);
+border-radius:28px;
+padding:22px;
+}
+
+.info-card h3{
+margin-bottom:15px;
+font-size:20px;
+}
+
+.info-card p{
+font-size:14px;
+line-height:1.8;
+color:var(--muted);
+}
+
+/* =========================
+   FLOATING WA
+========================= */
+
+.whatsapp{
+position:fixed;
+bottom:90px;
+right:20px;
+width:65px;
+height:65px;
+border-radius:50%;
+background:
+linear-gradient(
+135deg,
+#22c55e,
+#16a34a
+);
+display:flex;
+justify-content:center;
+align-items:center;
+box-shadow:
+0 10px 30px rgba(34,197,94,0.4);
+z-index:999;
+animation:floatButton 3s infinite ease-in-out;
+}
+
+@keyframes floatButton{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+/* =========================
+   BOTTOM NAV
+========================= */
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:
+rgba(2,6,23,0.90);
+backdrop-filter:blur(18px);
+border-top:1px solid var(--border);
+display:flex;
+justify-content:space-around;
+padding:14px 0;
+z-index:999;
+}
+
+.bottom-nav a{
+text-decoration:none;
+color:var(--muted);
+font-size:12px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:5px;
+}
+
+.bottom-nav a.active{
+color:var(--primary);
+}
+
+</style>
+
 </head>
 
 <body>
-  <div class="container">
-    <h1>Buat Order Pengiriman</h1>
 
-    <div class="card">
-      <input type="text" id="nama" placeholder="Nama Pengirim"><br><br>
-      <input type="text" id="alamat" placeholder="Alamat Tujuan"><br><br>
-      <input type="text" id="barang" placeholder="Jenis Barang"><br><br>
-      <input type="number" id="berat" placeholder="Berat (kg)"><br><br>
+<!-- NAVBAR -->
 
-<input type="text" id="hp" placeholder="No HP">
-<input type="text" id="catatan" placeholder="Catatan">
-<select id="pembayaran">
-  <option>COD</option>
-  <option>Transfer</option>
+<div class="navbar">
+
+<div class="logo">
+
+<div class="logo-dot"></div>
+
+Delivery Express
+
+</div>
+
+</div>
+
+<!-- CONTAINER -->
+
+<div class="container">
+
+<!-- HEADER -->
+
+<div class="header">
+
+<div class="badge">
+🚀 Delivery Modern 2026
+</div>
+
+<h1>
+Order Delivery
+</h1>
+
+<p>
+Pesan layanan delivery express Selatpanjang dengan cepat dan mudah.
+</p>
+
+</div>
+
+<!-- FORM -->
+
+<div class="form-card">
+
+<form id="orderForm">
+
+<div class="input-group">
+
+<label>
+Nama Lengkap
+</label>
+
+<input type="text"
+id="customer"
+placeholder="Masukkan nama lengkap"
+required>
+
+</div>
+
+<div class="input-group">
+
+<label>
+Nomor WhatsApp
+</label>
+
+<input type="number"
+id="phone"
+placeholder="08xxxxxxxxxx"
+required>
+
+</div>
+
+<div class="input-group">
+
+<label>
+Jenis Layanan
+</label>
+
+<select id="service">
+
+<option value="Makanan">
+Delivery Makanan
+</option>
+
+<option value="Paket">
+Pengiriman Paket
+</option>
+
+<option value="Belanja">
+Belanja Titip
+</option>
+
+<option value="Express">
+Express Instant
+</option>
+
 </select>
-      
-      <button onclick="kirimOrder()">Kirim Order</button>
-    </div>
-  </div>
 
-  <script src="order.js"></script>
+</div>
+
+<div class="input-group">
+
+<label>
+Alamat Lengkap
+</label>
+
+<textarea id="address"
+placeholder="Masukkan alamat lengkap..."
+required></textarea>
+
+</div>
+
+<button type="submit"
+class="btn">
+
+Kirim Order
+
+</button>
+
+</form>
+
+</div>
+
+<!-- INFO -->
+
+<div class="info-card">
+
+<h3>
+Informasi Admin
+</h3>
+
+<p>
+WhatsApp Admin:
+<br><br>
+
+<strong>
+0831-9100-8971
+</strong>
+
+</p>
+
+</div>
+
+</div>
+
+<!-- FLOATING WHATSAPP -->
+
+<a href="https://wa.me/6283191008971"
+class="whatsapp">
+
+<svg xmlns="http://www.w3.org/2000/svg"
+width="30"
+height="30"
+fill="white"
+viewBox="0 0 16 16">
+
+<path d="M13.601 2.326A7.854 7.854 0 0 0 8.002 0C3.584 0 0 3.582 0 8c0 1.41.37 2.788 1.073 4l-1.1 4.018 4.11-1.078A7.965 7.965 0 0 0 8.002 16C12.42 16 16 12.418 16 8a7.95 7.95 0 0 0-2.399-5.674z"/>
+
+</svg>
+
+</a>
+
+<!-- BOTTOM NAV -->
+
+<div class="bottom-nav">
+
+<a href="index.html">
+🏠
+<span>Home</span>
+</a>
+
+<a href="order.html"
+class="active">
+📦
+<span>Order</span>
+</a>
+
+<a href="dashboard.html">
+📍
+<span>Dashboard</span>
+</a>
+
+<a href="admin.html">
+⚙️
+<span>Admin</span>
+</a>
+
+</div>
+
+<!-- APP JS -->
+
+<script type="module"
+src="app.js"></script>
+
 </body>
-                                                                     </html>
+  </html>
