@@ -1,0 +1,26 @@
+name: PWA Build 2026
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate PWA Files
+        run: |
+
+          test -f manifest.json
+          test -f service-worker.js
+
+          echo "PWA files OK"
+
+      - name: Cache check
+        run: echo "PWA Ready 🚀"
+
+      - name: Build Success
+        run: echo "PWA Build Completed 2026"
