@@ -1,21 +1,630 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Dashboard Order</title>
-  <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard | Delivery Express 2026</title>
+
+<meta name="description"
+content="Dashboard modern Delivery Express Selatpanjang 2026">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
+
+:root{
+
+--bg:#020617;
+--card:#0f172a;
+--card2:#111827;
+--primary:#22c55e;
+--primary2:#16a34a;
+--text:#ffffff;
+--muted:#94a3b8;
+--border:rgba(255,255,255,0.06);
+
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:
+radial-gradient(circle at top left,#0f172a,#020617 65%);
+color:var(--text);
+overflow-x:hidden;
+min-height:100vh;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+position:fixed;
+top:0;
+left:0;
+width:260px;
+height:100vh;
+background:rgba(15,23,42,0.92);
+backdrop-filter:blur(18px);
+border-right:1px solid var(--border);
+padding:25px 20px;
+z-index:999;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-size:22px;
+font-weight:700;
+margin-bottom:40px;
+}
+
+.logo-dot{
+width:12px;
+height:12px;
+border-radius:50%;
+background:var(--primary);
+box-shadow:
+0 0 20px var(--primary);
+}
+
+.sidebar-menu{
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.sidebar-menu a{
+text-decoration:none;
+color:var(--muted);
+padding:15px;
+border-radius:18px;
+font-size:14px;
+transition:0.3s;
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu a.active{
+background:rgba(34,197,94,0.12);
+color:var(--primary);
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+margin-left:260px;
+padding:30px;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.topbar h1{
+font-size:34px;
+font-weight:800;
+}
+
+.topbar p{
+margin-top:8px;
+color:var(--muted);
+font-size:14px;
+}
+
+.profile{
+display:flex;
+align-items:center;
+gap:12px;
+background:rgba(255,255,255,0.03);
+padding:10px 16px;
+border-radius:18px;
+border:1px solid var(--border);
+}
+
+.avatar{
+width:42px;
+height:42px;
+border-radius:50%;
+background:
+linear-gradient(
+135deg,
+var(--primary),
+var(--primary2)
+);
+display:flex;
+justify-content:center;
+align-items:center;
+font-weight:700;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+margin-bottom:30px;
+}
+
+.card{
+background:rgba(255,255,255,0.03);
+backdrop-filter:blur(18px);
+border:1px solid var(--border);
+border-radius:28px;
+padding:25px;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.card h2{
+font-size:34px;
+margin-bottom:10px;
+color:var(--primary);
+}
+
+.card p{
+font-size:14px;
+color:var(--muted);
+}
+
+/* =========================
+   ORDER SECTION
+========================= */
+
+.orders{
+background:rgba(255,255,255,0.03);
+backdrop-filter:blur(18px);
+border:1px solid var(--border);
+border-radius:30px;
+padding:25px;
+overflow:auto;
+}
+
+.orders-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+margin-bottom:20px;
+flex-wrap:wrap;
+}
+
+.orders-header h2{
+font-size:26px;
+}
+
+.search{
+padding:14px 18px;
+border-radius:18px;
+border:1px solid var(--border);
+background:#111827;
+color:white;
+outline:none;
+min-width:230px;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+padding:16px;
+text-align:left;
+font-size:13px;
+color:var(--muted);
+border-bottom:1px solid var(--border);
+}
+
+td{
+padding:18px 16px;
+font-size:14px;
+border-bottom:1px solid rgba(255,255,255,0.04);
+}
+
+.status{
+padding:8px 14px;
+border-radius:999px;
+font-size:12px;
+font-weight:600;
+display:inline-block;
+}
+
+.pending{
+background:rgba(234,179,8,0.12);
+color:#facc15;
+}
+
+.process{
+background:rgba(59,130,246,0.12);
+color:#60a5fa;
+}
+
+.done{
+background:rgba(34,197,94,0.12);
+color:#4ade80;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn{
+padding:10px 15px;
+border:none;
+border-radius:14px;
+font-size:13px;
+font-weight:600;
+cursor:pointer;
+background:
+linear-gradient(
+135deg,
+var(--primary),
+var(--primary2)
+);
+color:white;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:translateY(-2px);
+}
+
+/* =========================
+   MOBILE NAV
+========================= */
+
+.mobile-nav{
+display:none;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:950px){
+
+.sidebar{
+display:none;
+}
+
+.main{
+margin-left:0;
+padding:20px;
+}
+
+.stats{
+grid-template-columns:repeat(2,1fr);
+}
+
+.mobile-nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:rgba(2,6,23,0.90);
+backdrop-filter:blur(18px);
+border-top:1px solid var(--border);
+display:flex;
+justify-content:space-around;
+padding:14px 0;
+z-index:999;
+}
+
+.mobile-nav a{
+text-decoration:none;
+color:var(--muted);
+font-size:12px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:5px;
+}
+
+.mobile-nav a.active{
+color:var(--primary);
+}
+
+body{
+padding-bottom:90px;
+}
+
+}
+
+</style>
+
 </head>
 
 <body>
-  <div class="container">
-    <h1>Daftar Order</h1>
 
-    <div id="listOrder"></div>
+<!-- SIDEBAR -->
 
-    <br>
-    <a href="order.html">+ Buat Order Baru</a>
-  </div>
+<div class="sidebar">
 
-  <script src="dashboard.js"></script>
+<div class="logo">
+
+<div class="logo-dot"></div>
+
+Delivery Admin
+
+</div>
+
+<div class="sidebar-menu">
+
+<a href="#" class="active">
+🏠 Dashboard
+</a>
+
+<a href="#">
+📦 Order
+</a>
+
+<a href="#">
+🛵 Driver
+</a>
+
+<a href="#">
+📍 Tracking
+</a>
+
+<a href="#">
+📞 Customer
+</a>
+
+<a href="#">
+⚙️ Settings
+</a>
+
+</div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+
+<div>
+
+<h1>
+Dashboard 2026
+</h1>
+
+<p>
+Delivery Express Selatpanjang
+</p>
+
+</div>
+
+<div class="profile">
+
+<div class="avatar">
+A
+</div>
+
+<div>
+<h4>Admin</h4>
+
+<p style="font-size:12px;color:#94a3b8;">
+Online
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="card">
+<h2>128</h2>
+<p>Total Order</p>
+</div>
+
+<div class="card">
+<h2>42</h2>
+<p>Driver Aktif</p>
+</div>
+
+<div class="card">
+<h2>97%</h2>
+<p>Kepuasan</p>
+</div>
+
+<div class="card">
+<h2>24/7</h2>
+<p>Online Service</p>
+</div>
+
+</div>
+
+<!-- ORDER TABLE -->
+
+<div class="orders">
+
+<div class="orders-header">
+
+<h2>
+Order Terbaru
+</h2>
+
+<input type="text"
+class="search"
+placeholder="Cari order...">
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Customer</th>
+<th>Layanan</th>
+<th>Status</th>
+<th>Harga</th>
+<th>Aksi</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>#001</td>
+
+<td>Andi</td>
+
+<td>Delivery Makanan</td>
+
+<td>
+<span class="status pending">
+Pending
+</span>
+</td>
+
+<td>Rp15.000</td>
+
+<td>
+<button class="btn">
+Detail
+</button>
+</td>
+
+</tr>
+
+<tr>
+
+<td>#002</td>
+
+<td>Siti</td>
+
+<td>Pengiriman Paket</td>
+
+<td>
+<span class="status process">
+Process
+</span>
+</td>
+
+<td>Rp25.000</td>
+
+<td>
+<button class="btn">
+Detail
+</button>
+</td>
+
+</tr>
+
+<tr>
+
+<td>#003</td>
+
+<td>Rian</td>
+
+<td>Express Instant</td>
+
+<td>
+<span class="status done">
+Done
+</span>
+</td>
+
+<td>Rp18.000</td>
+
+<td>
+<button class="btn">
+Detail
+</button>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- MOBILE NAV -->
+
+<div class="mobile-nav">
+
+<a href="#" class="active">
+🏠
+<span>Home</span>
+</a>
+
+<a href="#">
+📦
+<span>Order</span>
+</a>
+
+<a href="#">
+🛵
+<span>Driver</span>
+</a>
+
+<a href="#">
+⚙️
+<span>Settings</span>
+</a>
+
+</div>
+
 </body>
-</html>
+  </html>
