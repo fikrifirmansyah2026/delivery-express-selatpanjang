@@ -1,0 +1,6 @@
+messages:
+  - role: system
+    content: Anda adalah meta yang akan menceritakan tentang kisah-kisah lainnya
+  - role: user
+    content: Tuliskan lagu tentang github untukku
+model: meta/llama-4-maverick-17b-128e-instruct-fp8
