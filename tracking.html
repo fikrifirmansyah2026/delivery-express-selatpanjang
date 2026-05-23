@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lacak Pesanan - Delivery Express Selatpanjang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #020617;
+      --card: #0f172a;
+      --primary: #22c55e;
+      --primary2: #16a34a;
+      --text: #ffffff;
+      --muted: #94a3b8;
+      --border: rgba(255,255,255,0.06);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top left, #0f172a, #020617 65%);
+      color: var(--text);
+      min-height: 100vh;
+      padding-top: 80px;
+      padding-bottom: 100px;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(2,6,23,0.80);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      z-index: 999;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .logo-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 20px var(--primary);
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .section {
+      padding: 40px 20px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--primary);
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(34,197,94,0.05);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 10px 30px rgba(34,197,94,0.30);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .tracking-result {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      margin-top: 30px;
+      display: none;
+    }
+
+    .tracking-result.active {
+      display: block;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: rgba(34,197,94,0.15);
+      border: 1px solid rgba(34,197,94,0.3);
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+
+    .status-timeline {
+      margin-top: 20px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timeline-item:last-child {
+      border-bottom: none;
+    }
+
+    .timeline-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .timeline-content h4 {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .timeline-content p {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .info-box {
+      background: rgba(59,130,246,0.08);
+      border: 1px solid rgba(59,130,246,0.15);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 20px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(2,6,23,0.85);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      padding: 14px 0;
+      z-index: 999;
+    }
+
+    .bottom-nav a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .bottom-nav a.active {
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">
+      <div class="logo-dot"></div>
+      Delivery Express
+    </div>
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="container">
+    <section class="section">
+      <h2 class="section-title">🔍 Lacak Pesanan</h2>
+      <p class="section-subtitle">Masukkan nomor pesanan untuk melacak status pengiriman real-time</p>
+
+      <div class="input-group">
+        <label for="order-number">Nomor Pesanan</label>
+        <input type="text" id="order-number" placeholder="Contoh: DEX-20260523-001" />
+      </div>
+
+      <button class="btn" onclick="trackOrder()">🔍 Lacak Pesanan</button>
+
+      <!-- Hasil Tracking -->
+      <div class="tracking-result" id="tracking-result">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <h3 id="result-order-number">DEX-20260523-001</h3>
+          <div class="status-badge" id="result-status">Dalam Pengiriman</div>
+        </div>
+
+        <div style="background: rgba(34,197,94,0.10); padding: 12px; border-radius: 8px; margin-bottom: 15px;">
+          <p style="font-size: 13px; color: var(--muted);">
+            <strong>📍 Lokasi Terkini:</strong><br>
+            Jl. Merdeka, Selatpanjang
+          </p>
+        </div>
+
+        <div class="status-timeline">
+          <h4 style="margin-bottom: 15px; color: var(--primary);">📋 Timeline Pengiriman</h4>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h4>✅ Pesanan Diterima</h4>
+              <p>2026-05-23 14:30</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h4>📦 Pesanan Dipersiapkan</h4>
+              <p>2026-05-23 14:45</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h4>🚗 Dalam Perjalanan</h4>
+              <p>2026-05-23 15:10</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot" style="background: var(--muted);"></div>
+            <div class="timeline-content">
+              <h4>🎉 Pesanan Tiba</h4>
+              <p>-</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-box">
+          <strong>🚕 Info Driver:</strong><br>
+          Driver: Ahmad Sopian<br>
+          Kontak: +6283191008971<br>
+          Estimasi Tiba: 10 menit<br>
+          <button class="btn" style="margin-top: 10px; padding: 10px;" onclick="hubungiDriver()">💬 Chat Driver</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="index.html">🏠 Home</a>
+    <a href="order.html">📦 Order</a>
+    <a href="tracking.html" class="active">📍 Tracking</a>
+    <a href="index.html#contact">📞 Kontak</a>
+  </div>
+
+  <script>
+    function trackOrder() {
+      const orderNumber = document.getElementById('order-number').value.trim();
+      
+      if (!orderNumber) {
+        alert('Masukkan nomor pesanan terlebih dahulu');
+        return;
+      }
+      
+      document.getElementById('result-order-number').innerText = orderNumber;
+      document.getElementById('tracking-result').classList.add('active');
+    }
+
+    function hubungiDriver() {
+      window.open('https://wa.me/6283191008971', '_blank');
+    }
+
+    // Contoh: Lacak otomatis jika ada parameter di URL
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('order')) {
+      document.getElementById('order-number').value = params.get('order');
+      setTimeout(() => trackOrder(), 500);
+    }
+  </script>
+</body>
+</html>
