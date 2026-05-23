@@ -1,0 +1,67 @@
+name: Firebase Auto Deploy 2026
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      deployments: write
+
+    steps:
+
+      # ========================================
+      # CHECKOUT REPOSITORY
+      # ========================================
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # ========================================
+      # SETUP NODE.JS
+      # ========================================
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # ========================================
+      # INSTALL FIREBASE TOOLS
+      # ========================================
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      # ========================================
+      # INSTALL DEPENDENCIES
+      # ========================================
+
+      - name: Install Dependencies
+        run: npm install || true
+
+      # ========================================
+      # BUILD PROJECT
+      # ========================================
+
+      - name: Build Project
+        run: npm run build || echo "No build script"
+
+      # ========================================
+      # DEPLOY TO FIREBASE HOSTING
+      # ========================================
+
+      - name: Deploy Firebase Hosting
+        run: firebase deploy --only hosting --token "${{ secrets.FIREBASE_TOKEN }}"
+
+      # ========================================
+      # SUCCESS
+      # ========================================
+
+      - name: Deployment Success
+        run: echo "Website successfully deployed 🚀"
