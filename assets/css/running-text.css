@@ -1,0 +1,119 @@
+/* ========================================
+RUNNING TEXT DELIVERY EXPRESS 2026
+======================================== */
+
+.running-bar{
+width:100%;
+overflow:hidden;
+background:linear-gradient(
+90deg,
+#03111f,
+#071b2d,
+#03111f
+);
+
+border:2px solid #00ff88;
+border-radius:20px;
+
+padding:14px 0;
+
+position:relative;
+
+box-shadow:
+0 0 20px rgba(0,255,136,0.3);
+
+margin-top:15px;
+}
+
+.running-track{
+display:flex;
+width:max-content;
+
+animation:
+runningText 20s linear infinite;
+}
+
+.running-text{
+display:flex;
+align-items:center;
+
+gap:25px;
+
+padding-left:100%;
+
+font-size:18px;
+font-weight:600;
+
+color:white;
+
+white-space:nowrap;
+}
+
+.running-text span{
+color:#00ff88;
+font-weight:700;
+}
+
+.running-text .dot{
+width:10px;
+height:10px;
+background:#00ff88;
+border-radius:50%;
+
+box-shadow:
+0 0 10px #00ff88;
+}
+
+.running-text .emoji{
+font-size:22px;
+}
+
+.running-bar::before{
+content:"";
+
+position:absolute;
+
+top:0;
+left:-100px;
+
+width:120px;
+height:100%;
+
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,0.15),
+transparent
+);
+
+animation:
+shine 3s linear infinite;
+}
+
+/* ========================================
+ANIMATION
+======================================== */
+
+@keyframes runningText{
+
+0%{
+transform:translateX(0);
+}
+
+100%{
+transform:translateX(-50%);
+}
+
+}
+
+@keyframes shine{
+
+0%{
+left:-120px;
+}
+
+100%{
+left:100%;
+}
+
+}
